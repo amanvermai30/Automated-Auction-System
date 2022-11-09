@@ -1,13 +1,14 @@
-package Buyer;
+package Seller;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BuyerLogin {
+public class SellerLogin {
 
-    JTextField textFieldUser;
-    JTextField textFieldPassWord;
-    BuyerLogin(){
+    SellerLogin(){
+
+        JTextField textFieldUser;
+        JTextField textFieldPassWord;
 
         JFrame frame1 = new JFrame();
 
@@ -37,7 +38,7 @@ public class BuyerLogin {
         textFieldPassWord.setBounds(150,160,150,30);
         frame1.add(textFieldPassWord);
 
-        JButton loginButton = new JButton("Buyer Login" );
+        JButton loginButton = new JButton("Seller Login" );
         loginButton.setBounds(150,210,150,30);
         loginButton.setBackground(Color.BLUE);
         loginButton.setForeground(Color.WHITE);
@@ -57,9 +58,7 @@ public class BuyerLogin {
 
     }
 
-
     public static void main(String[] args) {
-        new BuyerLogin();
 
     }
 }
