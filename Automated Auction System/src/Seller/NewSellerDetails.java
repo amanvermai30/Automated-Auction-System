@@ -1,4 +1,4 @@
-package Buyer;
+package Seller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
 
-public class NewBuyerDetails extends JFrame implements ActionListener {
+public class NewSellerDetails extends JFrame implements ActionListener {
 
     Random ran = new Random();
     int num = ran.nextInt(999999);
@@ -15,7 +15,7 @@ public class NewBuyerDetails extends JFrame implements ActionListener {
     JLabel empIDNumber;
     JButton createB;
 
-    public NewBuyerDetails(){
+    public NewSellerDetails(){
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -34,7 +34,7 @@ public class NewBuyerDetails extends JFrame implements ActionListener {
         img.setBounds(0,160,450,360);
         add(img);
 
-        JLabel heading = new JLabel("Create Your Buddy Account ");
+        JLabel heading = new JLabel("Create Your Seller Account ");
         heading.setBounds(300,30,500,100);
         heading.setFont(new Font("Tahoma",Font.BOLD,25));
         add(heading);
@@ -76,7 +76,6 @@ public class NewBuyerDetails extends JFrame implements ActionListener {
         empIDNumber.setFont(new Font("Tahoma",Font.PLAIN,20));
         add(empIDNumber);
 
-
         createB = new JButton(" create account");
         createB.setBounds(570,450,150,40);
         createB.setFont(new Font("Tohma", Font.PLAIN, 15));
@@ -89,21 +88,21 @@ public class NewBuyerDetails extends JFrame implements ActionListener {
         setSize(900,650);
         setLocation(230,40);
         setVisible(true);
-    }
 
+    }
 
     public static void main(String[] args) {
 
-        new NewBuyerDetails();
+        new NewSellerDetails();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == createB ){
-            JOptionPane.showMessageDialog(null, "Your Buddy Account created");
+        if( e.getSource() == createB ){
+            JOptionPane.showMessageDialog(null, "Account Created");
             setVisible(false);
-            new BuyerLogin();
+            new SellerLogin();
         }
     }
 }
