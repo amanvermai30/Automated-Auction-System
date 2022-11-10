@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class SellerLogin {
 
-    SellerLogin(){
+    public SellerLogin(){
 
         JTextField textFieldUser;
         JTextField textFieldPassWord;

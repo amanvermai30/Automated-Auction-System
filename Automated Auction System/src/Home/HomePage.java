@@ -1,9 +1,18 @@
 package Home;
 
+import Admin.AdminLogin;
+import Buyer.BuyerLogin;
+import Seller.SellerLogin;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class HomePage extends JFrame {
+public class HomePage extends JFrame implements ActionListener {
+
+
+    JButton adminB,sellerB,buyerB;
 
     HomePage(){
 
@@ -50,10 +59,11 @@ public class HomePage extends JFrame {
         adminH.setForeground(Color.BLACK);
         cover.add(adminH);
 
-        JButton adminB = new JButton("Login Here");
+        adminB = new JButton("Login Here");
         adminB.setBounds(270,470,110,40);
         adminB.setBackground(new Color(94, 0, 255));
         adminB.setForeground(Color.WHITE);
+        adminB.addActionListener(this);
         cover.add(adminB);
 
         JLabel buyerH = new JLabel("Buyer");
@@ -62,10 +72,11 @@ public class HomePage extends JFrame {
         buyerH.setForeground(Color.BLACK);
         cover.add(buyerH);
 
-        JButton buyerB = new JButton("Login Here");
+        buyerB = new JButton("Login Here");
         buyerB.setBounds(270,520,110,40);
         buyerB.setBackground(new Color(94, 0, 255));
         buyerB.setForeground(Color.WHITE);
+        buyerB.addActionListener(this);
         cover.add(buyerB);
 
         JLabel sellerH = new JLabel("Seller");
@@ -74,10 +85,11 @@ public class HomePage extends JFrame {
         sellerH.setForeground(Color.BLACK);
         cover.add(sellerH);
 
-        JButton sellerB = new JButton("Login Here");
+        sellerB = new JButton("Login Here");
         sellerB.setBounds(270,580,110,40);
         sellerB.setBackground(new Color(94, 0, 255));
         sellerB.setForeground(Color.WHITE);
+        sellerB.addActionListener(this);
         cover.add(sellerB);
 
 
@@ -109,4 +121,19 @@ public class HomePage extends JFrame {
         new HomePage();
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource() == adminB ){
+            setVisible(false);
+            new AdminLogin();
+        } else if( e.getSource() == buyerB ){
+            setVisible(false);
+            new BuyerLogin();
+        } else {
+            setVisible(false);
+            new SellerLogin();
+        }
+
+    }
 }

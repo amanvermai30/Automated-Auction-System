@@ -7,7 +7,7 @@ public class BuyerLogin {
 
     JTextField textFieldUser;
     JTextField textFieldPassWord;
-    BuyerLogin(){
+    public BuyerLogin(){
 
         JFrame frame1 = new JFrame();
 
