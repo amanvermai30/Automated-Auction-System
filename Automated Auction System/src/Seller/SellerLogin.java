@@ -51,14 +51,26 @@ public class SellerLogin {
         img.setBounds(270,40,300,250);
         frame1.add(img);
 
+        JLabel subH = new JLabel(" new Seller register ");
+        subH.setBounds(40,280,200,30);
+        subH.setFont( new Font("Tohma",Font.PLAIN,15));
+        frame1.add(subH);
+
+        JButton newB = new JButton("Here");
+        newB.setBounds(180,285,80,20);
+        newB.setFont(new Font("Tohma", Font.PLAIN, 15));
+        newB.setForeground(Color.WHITE);
+        newB.setBackground(Color.BLUE);
+        frame1.add(newB);
+
         frame1.setSize(580,400);
         frame1.setLocation(400,150);
         frame1.setVisible(true);
 
-
     }
 
     public static void main(String[] args) {
+        new SellerLogin();
 
     }
 }
