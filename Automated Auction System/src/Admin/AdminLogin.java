@@ -83,9 +83,9 @@ public class AdminLogin extends JFrame implements ActionListener {
             ResultSet rs = con.s.executeQuery(query);
             if(rs.next()){
                 setVisible(false);
+                new AdminHome();
             } else {
                 JOptionPane.showMessageDialog(null, "Invalid Username and Password");
-                setVisible(false);
             }
 
         }catch (SQLException ex){

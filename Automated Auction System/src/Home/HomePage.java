@@ -14,7 +14,7 @@ public class HomePage extends JFrame implements ActionListener {
 
     JButton adminB,sellerB,buyerB;
 
-    HomePage(){
+    public HomePage(){
 
 
 
