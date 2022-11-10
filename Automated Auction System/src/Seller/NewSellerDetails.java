@@ -1,9 +1,13 @@
 package Seller;
 
+import Buyer.BuyerLogin;
+import Home.MysqlConnectivity;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class NewSellerDetails extends JFrame implements ActionListener {
@@ -12,7 +16,7 @@ public class NewSellerDetails extends JFrame implements ActionListener {
     int num = ran.nextInt(999999);
 
     JTextField nameField,emailField,passwordField;
-    JLabel empIDNumber;
+    JLabel buyerIDNumber;
     JButton createB;
 
     public NewSellerDetails(){
@@ -39,7 +43,7 @@ public class NewSellerDetails extends JFrame implements ActionListener {
         heading.setFont(new Font("Tahoma",Font.BOLD,25));
         add(heading);
 
-        JLabel name = new JLabel("Name");
+        JLabel name = new JLabel("Username");
         name.setBounds(490,150,150,30);
         name.setFont(new Font("Tahoma",Font.PLAIN,20));
         add(name);
@@ -66,15 +70,15 @@ public class NewSellerDetails extends JFrame implements ActionListener {
         passwordField.setBounds(590,290,150,30);
         add(passwordField);
 
-        JLabel empId = new JLabel("Employee ID ");
+        JLabel empId = new JLabel("Seller ID ");
         empId.setBounds(490,360,150,30);
         empId.setFont(new Font("Tahoma",Font.PLAIN,20));
         add(empId);
 
-        empIDNumber = new JLabel(String.valueOf(num));
-        empIDNumber.setBounds(640,360,150,30);
-        empIDNumber.setFont(new Font("Tahoma",Font.PLAIN,20));
-        add(empIDNumber);
+        buyerIDNumber = new JLabel(String.valueOf(num));
+        buyerIDNumber.setBounds(640,360,150,30);
+        buyerIDNumber.setFont(new Font("Tahoma",Font.PLAIN,20));
+        add(buyerIDNumber);
 
         createB = new JButton(" create account");
         createB.setBounds(570,450,150,40);
@@ -100,9 +104,27 @@ public class NewSellerDetails extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if( e.getSource() == createB ){
-            JOptionPane.showMessageDialog(null, "Account Created");
+
+            String name = nameField.getText();
+            String email = emailField.getText();
+            String password = passwordField.getText();
+            String id = buyerIDNumber.getText();
+
+            try {
+                MysqlConnectivity con = new MysqlConnectivity();
+                String query = "insert into sellerdetails values( '"+name+"', '"+email+"', '"+password+"', '"+id+"') ";
+                String query2 = "insert into sellerlogin values( '"+name+"', '"+password+"' ) ";
+                con.s.executeUpdate(query);
+                con.s.executeUpdate(query2);
+
+
+            }catch (SQLException ex ){
+                ex.printStackTrace();
+            }
+
+            JOptionPane.showMessageDialog(null, "Your Seller Account created");
             setVisible(false);
-            new SellerLogin();
+            new BuyerLogin();
         }
     }
 }

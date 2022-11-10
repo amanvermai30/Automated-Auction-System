@@ -1,13 +1,17 @@
 package Buyer;
 
+import Home.MysqlConnectivity;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class BuyerLogin extends JFrame implements ActionListener {
 
-    JButton newB;
+    JButton newB,loginB;
     JTextField textFieldUser;
     JTextField textFieldPassWord;
     public BuyerLogin(){
@@ -39,11 +43,12 @@ public class BuyerLogin extends JFrame implements ActionListener {
         textFieldPassWord.setBounds(150,160,150,30);
         add(textFieldPassWord);
 
-        JButton loginButton = new JButton("Buyer Login" );
-        loginButton.setBounds(150,210,150,30);
-        loginButton.setBackground(Color.BLUE);
-        loginButton.setForeground(Color.WHITE);
-        add(loginButton);
+        loginB = new JButton("Buyer Login" );
+        loginB.setBounds(150,210,150,30);
+        loginB.setBackground(Color.BLUE);
+        loginB.setForeground(Color.WHITE);
+        loginB.addActionListener(this);
+        add(loginB);
 
         ImageIcon loginImg = new ImageIcon(ClassLoader.getSystemResource("Photos/img3.png"));
         Image i1 = loginImg.getImage().getScaledInstance(350,250,Image.SCALE_DEFAULT);
@@ -85,6 +90,26 @@ public class BuyerLogin extends JFrame implements ActionListener {
         if( e.getSource() == newB ){
             setVisible(false);
             new NewBuyerDetails();
+        } else if (e.getSource() == loginB) {
+
+            try {
+
+                String userName = textFieldUser.getText();
+                String password = textFieldPassWord.getText();
+                String query = " select * from buyerlogin where username = '"+userName+"' and password = '"+password+"' ";
+                MysqlConnectivity con = new MysqlConnectivity();
+
+                ResultSet rs = con.s.executeQuery(query);
+                if(rs.next()){
+                    setVisible(false);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Invalid Username and Password");
+                }
+
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+
         }
 
     }
