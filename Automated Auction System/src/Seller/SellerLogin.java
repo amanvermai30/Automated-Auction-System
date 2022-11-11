@@ -100,6 +100,7 @@ public class SellerLogin extends JFrame implements ActionListener {
                 ResultSet rs = con.s.executeQuery(query);
                 if(rs.next()){
                     setVisible(false);
+                    new SellerHome();
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Username and Password");
                 }

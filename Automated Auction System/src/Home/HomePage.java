@@ -41,11 +41,11 @@ public class HomePage extends JFrame implements ActionListener {
         h.setForeground(Color.BLACK);
         cover.add(h);
 
-        JLabel subH = new JLabel("Automated Auction System");
-        subH.setBounds(350,50,700,70);
-        subH.setFont(new Font("Tohma",Font.PLAIN,35));
-        subH.setForeground(Color.CYAN);
-        cover.add(subH);
+//        JLabel subH = new JLabel("Automated Auction System");
+//        subH.setBounds(350,50,700,70);
+//        subH.setFont(new Font("Tohma",Font.PLAIN,35));
+//        subH.setForeground(Color.CYAN);
+//        cover.add(subH);
 
         JLabel subH2 = new JLabel("Buy Before Die");
         subH2.setBounds(950,50,700,70);
@@ -60,7 +60,7 @@ public class HomePage extends JFrame implements ActionListener {
         cover.add(adminH);
 
         adminB = new JButton("Login Here");
-        adminB.setBounds(270,470,110,40);
+        adminB.setBounds(270,470,110,35);
         adminB.setBackground(new Color(94, 0, 255));
         adminB.setForeground(Color.WHITE);
         adminB.addActionListener(this);
@@ -73,7 +73,7 @@ public class HomePage extends JFrame implements ActionListener {
         cover.add(buyerH);
 
         buyerB = new JButton("Login Here");
-        buyerB.setBounds(270,520,110,40);
+        buyerB.setBounds(270,520,110,35);
         buyerB.setBackground(new Color(94, 0, 255));
         buyerB.setForeground(Color.WHITE);
         buyerB.addActionListener(this);
@@ -86,7 +86,7 @@ public class HomePage extends JFrame implements ActionListener {
         cover.add(sellerH);
 
         sellerB = new JButton("Login Here");
-        sellerB.setBounds(270,580,110,40);
+        sellerB.setBounds(270,580,110,35);
         sellerB.setBackground(new Color(94, 0, 255));
         sellerB.setForeground(Color.WHITE);
         sellerB.addActionListener(this);

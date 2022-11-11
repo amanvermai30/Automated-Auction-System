@@ -95,6 +95,9 @@ public class AdminHome extends JFrame implements ActionListener {
             setVisible(false);
             new ViewBuyer();
 
+        } else if( e.getSource() == viewSeller ){
+            setVisible(false);
+            new ViewSeller();
         }
 
     }

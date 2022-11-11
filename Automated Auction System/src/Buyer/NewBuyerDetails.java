@@ -16,7 +16,7 @@ public class NewBuyerDetails extends JFrame implements ActionListener {
 
     JTextField nameField,emailField,passwordField;
     JLabel buyerIDNumber;
-    JButton createB;
+    JButton createB,backB;
 
     public NewBuyerDetails(){
 
@@ -80,13 +80,21 @@ public class NewBuyerDetails extends JFrame implements ActionListener {
         add(buyerIDNumber);
 
 
-        createB = new JButton(" create account");
-        createB.setBounds(570,450,150,40);
-        createB.setFont(new Font("Tohma", Font.PLAIN, 15));
+        createB = new JButton(" Create Account");
+        createB.setBounds(520,450,130,35);
+        createB.setFont(new Font("Tohma", Font.PLAIN, 13));
         createB.setForeground(Color.WHITE);
         createB.setBackground(Color.BLUE);
         createB.addActionListener(this);
         add(createB);
+
+        backB = new JButton(" Back");
+        backB.setBounds(670,450,120,35);
+        backB.setFont(new Font("Tohma", Font.PLAIN, 13));
+        backB.setForeground(Color.WHITE);
+        backB.setBackground(Color.BLUE);
+        backB.addActionListener(this);
+        add(backB);
 
 
         setSize(900,650);
@@ -126,6 +134,11 @@ public class NewBuyerDetails extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Your Buddy Account created");
             setVisible(false);
             new BuyerLogin();
+
+        }else if( e.getSource() == backB){
+            setVisible(false);
+            new BuyerLogin();
         }
+
     }
 }
