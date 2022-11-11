@@ -29,11 +29,11 @@ public class AdminHome extends JFrame implements ActionListener {
         logo.setBounds(10,0,260,80);
         cover.add(logo);
 
-        ImageIcon adminImg = new ImageIcon(ClassLoader.getSystemResource("Photos/aman.png"));
-        Image i3 = adminImg.getImage().getScaledInstance(150,150,Image.SCALE_DEFAULT);
+        ImageIcon adminImg = new ImageIcon(ClassLoader.getSystemResource("Photos/img8.png"));
+        Image i3 = adminImg.getImage().getScaledInstance(230,200,Image.SCALE_DEFAULT);
         ImageIcon adminIcon2 = new ImageIcon(i3);
         JLabel admin = new JLabel(adminIcon2);
-        admin.setBounds(730,90,150,150);
+        admin.setBounds(680,70,230,200);
         cover.add(admin);
 
 
@@ -91,6 +91,10 @@ public class AdminHome extends JFrame implements ActionListener {
         if( e.getSource() == logout ){
             setVisible(false);
             new AdminLogin();
+        } else if (e.getSource() == viewBuyer) {
+            setVisible(false);
+            new ViewBuyer();
+
         }
 
     }
