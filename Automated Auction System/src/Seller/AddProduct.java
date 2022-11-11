@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.Random;
 
-public class CreateList extends JFrame implements ActionListener {
+public class AddProduct extends JFrame implements ActionListener {
 
     JTextField productField,categoryField,priceField,quantityField,ownerField;
     Random ran = new Random();
@@ -19,7 +19,7 @@ public class CreateList extends JFrame implements ActionListener {
 
     JButton addToListB,backB;
 
-    CreateList(){
+    AddProduct(){
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -126,7 +126,7 @@ public class CreateList extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new CreateList();
+        new AddProduct();
     }
     @Override
     public void actionPerformed(ActionEvent e) {

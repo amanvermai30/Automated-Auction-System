@@ -1,7 +1,5 @@
 package Seller;
 
-import Home.HomePage;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,7 +8,7 @@ import java.awt.event.ActionListener;
 public class SellerHome extends JFrame implements ActionListener {
 
 
-    JButton createList,updateItems,addItems,removeItems,viewSoldItems,logout;
+    JButton viewList,updateItems,addItems,removeItems,viewSoldItems,logout;
     SellerHome(){
 
 
@@ -55,11 +53,11 @@ public class SellerHome extends JFrame implements ActionListener {
         addItems.addActionListener(this);
         add(addItems);
 
-        createList = new JButton("View Product List");
-        createList.setBounds(610,280,150,40);
-        createList.setFont(new Font("Tahoma",Font.BOLD,12));
-        createList.addActionListener(this);
-        add(createList);
+        viewList = new JButton("View Product List");
+        viewList.setBounds(610,280,150,40);
+        viewList.setFont(new Font("Tahoma",Font.BOLD,12));
+        viewList.addActionListener(this);
+        add(viewList);
 
         viewSoldItems = new JButton("View Sold Product");
         viewSoldItems.setBounds(700,480,150,40);
@@ -72,8 +70,6 @@ public class SellerHome extends JFrame implements ActionListener {
         logout.setFont(new Font("Tahoma",Font.BOLD,12));
         logout.addActionListener(this);
         add(logout);
-
-
 
 
         setSize(1380,740);
@@ -94,7 +90,14 @@ public class SellerHome extends JFrame implements ActionListener {
             new SellerLogin();
         } else if (e.getSource() == addItems) {
             setVisible(false);
-            new CreateList();
+            new AddProduct();
+
+        }else if(e.getSource() == viewList){
+            setVisible(false);
+            new ViewProduct();
+        }else if(e.getSource() == updateItems ){
+            setVisible(false);
+            new ViewProduct();
         }
 
     }
