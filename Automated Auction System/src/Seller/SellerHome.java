@@ -55,7 +55,7 @@ public class SellerHome extends JFrame implements ActionListener {
         addItems.addActionListener(this);
         add(addItems);
 
-        createList = new JButton("Create List");
+        createList = new JButton("View Product List");
         createList.setBounds(610,280,150,40);
         createList.setFont(new Font("Tahoma",Font.BOLD,12));
         createList.addActionListener(this);
@@ -92,6 +92,9 @@ public class SellerHome extends JFrame implements ActionListener {
         if( e.getSource() == logout ){
             setVisible(false);
             new SellerLogin();
+        } else if (e.getSource() == addItems) {
+            setVisible(false);
+            new CreateList();
         }
 
     }
