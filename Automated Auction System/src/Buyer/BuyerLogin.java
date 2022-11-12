@@ -101,7 +101,10 @@ public class BuyerLogin extends JFrame implements ActionListener {
 
                 ResultSet rs = con.s.executeQuery(query);
                 if(rs.next()){
+
+                    String uniqueBuyerUser = rs.getString("username");
                     setVisible(false);
+                    new BuyerHome( uniqueBuyerUser );
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Username and Password");
                 }

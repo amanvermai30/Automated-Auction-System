@@ -1,4 +1,5 @@
-package Admin;
+package Buyer;
+
 
 import Home.MysqlConnectivity;
 import net.proteanit.sql.DbUtils;
@@ -13,9 +14,8 @@ import java.sql.SQLException;
 public class ViewSeller extends JFrame implements ActionListener {
 
     JTable table;
-    Choice chSellerID;
-
     JButton searchB,backB;
+    Choice chCategory;
 
     ViewSeller(){
 
@@ -42,34 +42,35 @@ public class ViewSeller extends JFrame implements ActionListener {
         h.setForeground(Color.BLACK);
         add(h);
 
-        chSellerID = new Choice();
-        chSellerID.setBounds(220,150,150,20);
-        add(chSellerID);
+        chCategory = new Choice();
+        chCategory.setBounds(220,150,150,20);
+        add(chCategory);
 
-        JLabel search = new JLabel("Search by Seller Id");
+        JLabel search = new JLabel("Search by Category");
         search.setBounds(80,150,150,25);
         search.setFont(new Font("Tohma",Font.PLAIN,14));
         add(search);
 
         searchB = new JButton("search");
-        searchB.setBounds(360,20,80,23);
+        searchB.setBounds(390,150,80,23);
         searchB.addActionListener(this);
-        cover.add(searchB);
+        add(searchB);
 
         backB = new JButton("Back");
-        backB.setBounds(360,60,80,23);
+        backB.setBounds(360,20,80,23);
         backB.addActionListener(this);
         cover.add(backB);
+
 
         table = new JTable();
 
         try {
             MysqlConnectivity con = new MysqlConnectivity();
-            String query = " select * from sellerdetails";
+            String query = " select * from productlist";
             ResultSet rs = con.s.executeQuery(query);
 
             while (rs.next()){
-                chSellerID.add(rs.getString("sellerID"));
+                chCategory.add(rs.getString("category"));
             }
 
         }catch (SQLException ex){
@@ -78,7 +79,7 @@ public class ViewSeller extends JFrame implements ActionListener {
 
         try {
             MysqlConnectivity con = new MysqlConnectivity();
-            String query = " select * from sellerdetails";
+            String query = "select productname,category,ownername from productlist;";
             ResultSet rs = con.s.executeQuery(query);
             table.setModel(DbUtils.resultSetToTableModel(rs));
 
@@ -86,43 +87,39 @@ public class ViewSeller extends JFrame implements ActionListener {
             ex.printStackTrace();
         }
 
+
         JScrollPane jScrollPane = new JScrollPane(table);
         jScrollPane.setBounds(510,150,840,530);
         add(jScrollPane);
 
 
 
+
         setSize(1380,740);
         setLocation(0,0);
         setVisible(true);
-
     }
-
 
     public static void main(String[] args) {
-        new ViewSeller();
+         new ViewSeller();
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == backB){
+        if(e.getSource() == backB ){
             setVisible(false);
-            new AdminHome();
-
-        } else if(e.getSource() == searchB ){
+            new BuyerHome(BuyerHome.uniqueUser);
+        } else if( e.getSource() == searchB ){
 
             try {
                 MysqlConnectivity con = new MysqlConnectivity();
-                String query = "select * from sellerdetails where sellerID =  '"+chSellerID.getSelectedItem()+"' ";
+                String query = "select * from productlist where category =  '"+chCategory.getSelectedItem()+"' ";
                 ResultSet rs = con.s.executeQuery(query);
                 table.setModel(DbUtils.resultSetToTableModel(rs));
 
             }catch (SQLException ex){
                 ex.printStackTrace();
             }
-
         }
-
     }
 }
