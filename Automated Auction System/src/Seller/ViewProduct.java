@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Objects;
 
 public class ViewProduct extends JFrame implements ActionListener {
 
@@ -117,7 +119,7 @@ public class ViewProduct extends JFrame implements ActionListener {
 
         if(e.getSource() == backB){
             setVisible(false);
-            new SellerHome();
+            new SellerHome(SellerHome.uniqueUser);
 
         } else if(e.getSource() == searchB ){
 
@@ -130,6 +132,10 @@ public class ViewProduct extends JFrame implements ActionListener {
             }catch (SQLException ex){
                 ex.printStackTrace();
             }
+
+        }else if( e.getSource() == updateB ){
+            setVisible(false);
+            new UpdateProduct(chProductID.getSelectedItem());
 
         }
 

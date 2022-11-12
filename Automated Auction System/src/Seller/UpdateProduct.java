@@ -6,25 +6,29 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Objects;
 import java.util.Random;
 
-public class AddProduct extends JFrame implements ActionListener {
+public class UpdateProduct extends JFrame implements ActionListener {
 
-    JTextField productField,categoryField,priceField,quantityField,ownerField;
+    JTextField productField,categoryField,priceField,quantityField;
     Random ran = new Random();
     int num = ran.nextInt(999999);
 
-    JLabel productIDNumber;
+    JLabel productIDNumber,ownerField;
+    String owner;
 
-    JButton addToListB,backB;
-
-    AddProduct(){
+    JButton updateB,backB;
+    String prodID;
+    UpdateProduct( String prodID ){
+          this.prodID = prodID;
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
-        ImageIcon coverImg = new ImageIcon(ClassLoader.getSystemResource("Photos/img11.png"));
+        ImageIcon coverImg = new ImageIcon(ClassLoader.getSystemResource("Photos/img14.png"));
         Image i1 = coverImg.getImage().getScaledInstance(480,440,Image.SCALE_DEFAULT);
         ImageIcon coverIcon2 = new ImageIcon(i1);
         JLabel cover = new JLabel(coverIcon2);
@@ -38,7 +42,7 @@ public class AddProduct extends JFrame implements ActionListener {
         logo.setBounds(10,0,260,80);
         add(logo);
 
-        JLabel h = new JLabel("Add Product To List ");
+        JLabel h = new JLabel("Update Product");
         h.setBounds(630,0,700,70);
         h.setFont(new Font("Tohma",Font.PLAIN,35));
         h.setForeground(Color.BLACK);
@@ -86,7 +90,7 @@ public class AddProduct extends JFrame implements ActionListener {
         ownerName.setFont(new Font("Tahoma",Font.PLAIN,20));
         add(ownerName);
 
-        ownerField = new JTextField();
+        ownerField = new JLabel();
         ownerField.setBounds(1050,200,150,30);
         add(ownerField);
 
@@ -96,18 +100,18 @@ public class AddProduct extends JFrame implements ActionListener {
         add(productID);
 
 
-        productIDNumber = new JLabel(String.valueOf(num));
+        productIDNumber = new JLabel();
         productIDNumber.setBounds(1050,250,150,30);
         productIDNumber.setFont(new Font("Tahoma",Font.PLAIN,20));
         add(productIDNumber);
 
-        addToListB = new JButton("Add to list");
-        addToListB.setBounds(680,385,130,35);
-        addToListB.setFont(new Font("Tohma", Font.PLAIN, 15));
-        addToListB.setForeground(Color.WHITE);
-        addToListB.setBackground(Color.BLUE);
-        addToListB.addActionListener(this);
-        add(addToListB);
+        updateB = new JButton("Update Details");
+        updateB.setBounds(680,385,130,35);
+        updateB.setFont(new Font("Tohma", Font.PLAIN, 15));
+        updateB.setForeground(Color.WHITE);
+        updateB.setBackground(Color.BLUE);
+        updateB.addActionListener(this);
+        add(updateB);
 
         backB = new JButton("Back");
         backB.setBounds(880,385,130,35);
@@ -117,48 +121,74 @@ public class AddProduct extends JFrame implements ActionListener {
         backB.addActionListener(this);
         add(backB);
 
+        try {
+
+            MysqlConnectivity con = new MysqlConnectivity();
+            String query = "select * from productlist where productID = '"+prodID+"' ";
+            ResultSet resultSet = con.s.executeQuery(query);
+            while( resultSet.next() ){
+
+                productField.setText(resultSet.getString("productname"));
+                categoryField.setText(resultSet.getString("category"));
+                priceField.setText(resultSet.getString("price"));
+                quantityField.setText(resultSet.getString("quantity"));
+                productIDNumber.setText(resultSet.getString("productID"));
+                ownerField.setText(resultSet.getString("ownername"));
+                owner = resultSet.getString("ownername");
+            }
+
+        }catch (SQLException ex ){
+            ex.printStackTrace();
+        }
+
+
 
         setSize(1380,740);
         setLocation(0,0);
         setVisible(true);
-
     }
 
+
     public static void main(String[] args) {
-        new AddProduct();
+        new UpdateProduct("");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == backB ){
+        if( e.getSource() == backB ){
             setVisible(false);
-            new SellerHome( SellerHome.uniqueUser);
+            new ViewProduct();
 
-        } else if(e.getSource() == addToListB ){
+        } else  if(e.getSource() == updateB ){
 
-            String productName = productField.getText();
-            String category = categoryField.getText();
-            int price = Integer.parseInt(priceField.getText());
-            int quantity = Integer.parseInt(quantityField.getText());
-            String ownerName = ownerField.getText();
-            String productID = productIDNumber.getText();
+            if(owner == SellerHome.uniqueUser){
 
-            try {
-                MysqlConnectivity con = new MysqlConnectivity();
-                String query = "insert into productlist values( '"+productName+"', '"+category+"'," +
-                        " '"+price+"', '"+quantity+"', '"+ownerName+"', '"+productID+"') ";
-                con.s.executeUpdate(query);
+                String productName = productField.getText();
+                String category = categoryField.getText();
+                int price = Integer.parseInt(priceField.getText());
+                int quantity = Integer.parseInt(quantityField.getText());
 
+                try {
+                    MysqlConnectivity con = new MysqlConnectivity();
+                    String query = " update productlist set productname = '"+productName+"', " +
+                            "category = '"+category+"', price = '"+price+"', quantity = '"+quantity+"'," +
+                            "where productID = '"+prodID+"' ";
 
-            }catch (SQLException ex ){
-                ex.printStackTrace();
+                    con.s.executeUpdate(query);
+                    JOptionPane.showMessageDialog(null, "Details Updated Successfully ");
+                    setVisible(false);
+                    new ViewProduct();
+
+                }catch (SQLException ex ){
+                    ex.printStackTrace();
+                }
+
             }
 
-            JOptionPane.showMessageDialog(null, "Your Product is Added");
+            JOptionPane.showMessageDialog(null, "Sorry Bidder this product is own by " +
+                    " "+owner+" Please Select your product");
             setVisible(false);
-            new SellerHome("");
-
+            new ViewProduct();
         }
-
     }
 }

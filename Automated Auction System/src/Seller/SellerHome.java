@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 
 public class SellerHome extends JFrame implements ActionListener {
 
-
+    public  static String uniqueUser;
     JButton viewList,updateItems,addItems,removeItems,viewSoldItems,logout;
-    SellerHome(){
 
+    SellerHome( String uniqueUser ){
+          SellerHome.uniqueUser = uniqueUser;
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
@@ -29,7 +30,7 @@ public class SellerHome extends JFrame implements ActionListener {
         logo.setBounds(10,0,260,80);
         add(logo);
 
-        JLabel h = new JLabel("Welcome Bidder ");
+        JLabel h = new JLabel("Welcome "+uniqueUser+" ");
         h.setBounds(630,0,700,70);
         h.setFont(new Font("Tohma",Font.PLAIN,45));
         h.setForeground(Color.BLACK);
@@ -80,7 +81,7 @@ public class SellerHome extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new SellerHome();
+        new SellerHome(uniqueUser);
     }
     @Override
     public void actionPerformed(ActionEvent e) {

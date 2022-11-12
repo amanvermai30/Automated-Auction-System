@@ -70,6 +70,7 @@ public class SellerLogin extends JFrame implements ActionListener {
         newB.addActionListener(this);
         add(newB);
 
+
         setSize(580,400);
         setLocation(400,150);
         setVisible(true);
@@ -99,8 +100,10 @@ public class SellerLogin extends JFrame implements ActionListener {
 
                 ResultSet rs = con.s.executeQuery(query);
                 if(rs.next()){
+
+                    String uniqueUser = rs.getString("username");
                     setVisible(false);
-                    new SellerHome();
+                    new SellerHome( uniqueUser );
                 } else {
                     JOptionPane.showMessageDialog(null, "Invalid Username and Password");
                 }
