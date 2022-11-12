@@ -113,7 +113,8 @@ public class ViewSeller extends JFrame implements ActionListener {
 
             try {
                 MysqlConnectivity con = new MysqlConnectivity();
-                String query = "select * from productlist where category =  '"+chCategory.getSelectedItem()+"' ";
+                String query = "select productname,category,ownername from productlist where" +
+                        " category =  '"+chCategory.getSelectedItem()+"' ";
                 ResultSet rs = con.s.executeQuery(query);
                 table.setModel(DbUtils.resultSetToTableModel(rs));
 
