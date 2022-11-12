@@ -1,6 +1,5 @@
 package Seller;
 
-import Admin.AdminHome;
 import Home.MysqlConnectivity;
 import net.proteanit.sql.DbUtils;
 
@@ -10,23 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Objects;
 
-public class ViewProduct extends JFrame implements ActionListener {
+public class RemoveProduct extends JFrame implements ActionListener {
 
     JTable table;
     Choice chProductID;
 
-    JButton searchB,backB,updateB;
-
-    ViewProduct(){
-
+    JButton searchB,backB,removeB;
+    RemoveProduct(){
 
         getContentPane().setBackground(Color.WHITE);
         setLayout(null);
 
-        ImageIcon coverImg = new ImageIcon(ClassLoader.getSystemResource("Photos/img12.png"));
+        ImageIcon coverImg = new ImageIcon(ClassLoader.getSystemResource("Photos/img15.png"));
         Image i1 = coverImg.getImage().getScaledInstance(480,480,Image.SCALE_DEFAULT);
         ImageIcon coverIcon2 = new ImageIcon(i1);
         JLabel cover = new JLabel(coverIcon2);
@@ -40,11 +35,12 @@ public class ViewProduct extends JFrame implements ActionListener {
         logo.setBounds(10,0,260,80);
         add(logo);
 
-        JLabel h = new JLabel("All Products ");
-        h.setBounds(780,0,700,70);
+        JLabel h = new JLabel("Remove Product From List ");
+        h.setBounds(650,0,700,70);
         h.setFont(new Font("Tohma",Font.PLAIN,35));
         h.setForeground(Color.BLACK);
         add(h);
+
 
         chProductID = new Choice();
         chProductID.setBounds(190,110,150,20);
@@ -60,15 +56,15 @@ public class ViewProduct extends JFrame implements ActionListener {
         searchB.addActionListener(this);
         add(searchB);
 
-        updateB = new JButton("Update");
-        updateB.setBounds(360,180,80,23);
-        updateB.addActionListener(this);
-        add(updateB);
+        removeB = new JButton("Remove");
+        removeB.setBounds(360,180,80,23);
+        removeB.addActionListener(this);
+        add(removeB);
 
         backB = new JButton("Back");
-        backB.setBounds(360,0,80,23);
+        backB.setBounds(250,180,80,23);
         backB.addActionListener(this);
-        cover.add(backB);
+        add(backB);
 
         table = new JTable();
 
@@ -104,7 +100,6 @@ public class ViewProduct extends JFrame implements ActionListener {
         add(jScrollPane);
 
 
-
         setSize(1380,740);
         setLocation(0,0);
         setVisible(true);
@@ -112,7 +107,7 @@ public class ViewProduct extends JFrame implements ActionListener {
 
 
     public static void main(String[] args) {
-        new ViewProduct();
+        new RemoveProduct();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -133,7 +128,7 @@ public class ViewProduct extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
 
-        }else if( e.getSource() == updateB ){
+        }else if( e.getSource() == removeB ){
 
             String owner = null;
 
@@ -149,16 +144,28 @@ public class ViewProduct extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
 
+
             if( owner.equals(SellerHome.uniqueUser)){
+
+                try {
+                    MysqlConnectivity con = new MysqlConnectivity();
+                    String query = "delete from productlist where productID =  '"+chProductID.getSelectedItem()+"' ";
+                    con.s.executeUpdate(query);
+
+                }catch (SQLException ex){
+                    ex.printStackTrace();
+                }
+
+                JOptionPane.showMessageDialog(null, "Product Remove Successfully From Product" +
+                        "List");
                 setVisible(false);
-                new UpdateProduct(chProductID.getSelectedItem());
+                new SellerHome(SellerHome.uniqueUser);
+
             }else {
                 JOptionPane.showMessageDialog(null, "Sorry Bidder this product is own by " +
-                        " "+owner+"You can not Update Please Select your product");
+                        " "+owner+" Please Select your product");
             }
 
-
         }
-
     }
 }

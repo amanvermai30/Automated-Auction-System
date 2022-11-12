@@ -18,7 +18,6 @@ public class UpdateProduct extends JFrame implements ActionListener {
     int num = ran.nextInt(999999);
 
     JLabel productIDNumber,ownerField;
-    String owner;
 
     JButton updateB,backB;
     String prodID;
@@ -134,7 +133,6 @@ public class UpdateProduct extends JFrame implements ActionListener {
                 quantityField.setText(resultSet.getString("quantity"));
                 productIDNumber.setText(resultSet.getString("productID"));
                 ownerField.setText(resultSet.getString("ownername"));
-                owner = resultSet.getString("ownername");
             }
 
         }catch (SQLException ex ){
@@ -161,34 +159,25 @@ public class UpdateProduct extends JFrame implements ActionListener {
 
         } else  if(e.getSource() == updateB ){
 
-            if(owner == SellerHome.uniqueUser){
+            String productName = productField.getText();
+            String category = categoryField.getText();
+            int price = Integer.parseInt(priceField.getText());
+            int quantity = Integer.parseInt(quantityField.getText());
 
-                String productName = productField.getText();
-                String category = categoryField.getText();
-                int price = Integer.parseInt(priceField.getText());
-                int quantity = Integer.parseInt(quantityField.getText());
+            try {
+                MysqlConnectivity con = new MysqlConnectivity();
+                String query = " update productlist set productname = '"+productName+"', " +
+                        "category = '"+category+"'," + " price = '"+price+"', quantity = '"+quantity+"' where productID = '"+prodID+"' ";
 
-                try {
-                    MysqlConnectivity con = new MysqlConnectivity();
-                    String query = " update productlist set productname = '"+productName+"', " +
-                            "category = '"+category+"', price = '"+price+"', quantity = '"+quantity+"'," +
-                            "where productID = '"+prodID+"' ";
+                con.s.executeUpdate(query);
+                JOptionPane.showMessageDialog(null, "Details Updated Successfully ");
+                setVisible(false);
+                new ViewProduct();
 
-                    con.s.executeUpdate(query);
-                    JOptionPane.showMessageDialog(null, "Details Updated Successfully ");
-                    setVisible(false);
-                    new ViewProduct();
-
-                }catch (SQLException ex ){
-                    ex.printStackTrace();
-                }
-
+            }catch (SQLException ex ){
+                ex.printStackTrace();
             }
 
-            JOptionPane.showMessageDialog(null, "Sorry Bidder this product is own by " +
-                    " "+owner+" Please Select your product");
-            setVisible(false);
-            new ViewProduct();
         }
     }
 }
