@@ -71,8 +71,6 @@ public class BuyerHome extends JFrame implements ActionListener {
         add(logout);
 
 
-
-
         setSize(1380,740);
         setLocation(0,0);
         setVisible(true);
@@ -88,13 +86,17 @@ public class BuyerHome extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        if(e.getSource() == logout ){
+        if(e.getSource() == buyProduct ){
             setVisible(false);
-            new BuyerLogin();
+            new BuyProduct();
 
         } else if( e.getSource() == viewBuyer ){
             setVisible(false);
             new ViewSeller();
+
+        }else if(e.getSource() == logout ){
+            setVisible(false);
+            new BuyerLogin();
         }
     }
 }

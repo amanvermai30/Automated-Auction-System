@@ -1,6 +1,7 @@
 package Buyer;
 
 import Home.MysqlConnectivity;
+import Seller.SellerHome;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
@@ -110,20 +111,6 @@ public class BuyProduct extends JFrame implements ActionListener {
         setLocation(0,0);
         setVisible(true);
 
-        while (true){
-            subH2.setVisible(false);
-            try {
-                Thread.sleep(500);
-            }catch (Exception ignored){
-
-            }
-            subH2.setVisible(true);
-            try {
-                Thread.sleep(500);
-            }catch (Exception ignored){
-
-            }
-        }
 
 
     }
@@ -135,10 +122,14 @@ public class BuyProduct extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         String ownerName = null;
+        String productName = null;
+        String category = null;
+        int price = 0;
+        int quantity = 0;
+        String productID = null;
+        String buyerName = BuyerHome.uniqueUser;
 
         if(e.getSource() == searchB ){
-
-
 
             try {
                 MysqlConnectivity con = new MysqlConnectivity();
@@ -150,7 +141,30 @@ public class BuyProduct extends JFrame implements ActionListener {
                 ex.printStackTrace();
             }
 
+
+
+
         } else  if(e.getSource() == buyB ){
+
+            try {
+                MysqlConnectivity con = new MysqlConnectivity();
+                String query = "select * from productlist where productID =  '"+chProductID.getSelectedItem()+"' ";
+                ResultSet rs = con.s.executeQuery(query);
+                if(rs.next()){
+                    ownerName = rs.getString("ownername");
+                    category = rs.getString("category");
+                    price = rs.getInt("price");
+                    quantity = rs.getInt("quantity");
+                    productID = rs.getString("productID");
+                    productName = rs.getString("productname");
+
+                }
+
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+            JOptionPane.showMessageDialog(null, ownerName);
+
 
             try {
                 MysqlConnectivity con = new MysqlConnectivity();
@@ -163,19 +177,23 @@ public class BuyProduct extends JFrame implements ActionListener {
 
             try {
                 MysqlConnectivity con = new MysqlConnectivity();
-                String query = "select * from productlist where productID =  '"+chProductID.getSelectedItem()+"' ";
-                ResultSet rs = con.s.executeQuery(query);
-                if(rs.next()){
-                    ownerName = rs.getString("ownername");
-                }
+                String query = "insert into soldproductlist values( '"+productName+"', '"+category+"'," +
+                        " '"+price+"', '"+quantity+"', '"+ownerName+"', '"+productID+"', '"+buyerName+"' ) ";
+                con.s.executeUpdate(query);
 
-            }catch (SQLException ex){
+
+            }catch (SQLException ex ){
                 ex.printStackTrace();
             }
 
+            JOptionPane.showMessageDialog(null, "Thank you for buying "+productName+" Hope you" +
+                    "like our service ");
+            setVisible(false);
+            new BuyerHome(BuyerHome.uniqueUser);
+
+
 
         } else if (e.getSource() == backB) {
-            JOptionPane.showMessageDialog(null, ownerName);
             setVisible(false);
             new BuyerHome(BuyerHome.uniqueUser);
         }
