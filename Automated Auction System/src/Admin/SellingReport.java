@@ -1,7 +1,7 @@
-package Seller;
+package Admin;
 
-import Buyer.BuyerHome;
 import Home.MysqlConnectivity;
+import Seller.SellerHome;
 import net.proteanit.sql.DbUtils;
 
 import javax.swing.*;
@@ -11,13 +11,12 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ViewSoldProducts extends JFrame implements ActionListener {
+public class SellingReport extends JFrame implements ActionListener {
 
     JTable table;
     JButton searchB,backB;
     Choice chSellerName;
-
-    public ViewSoldProducts(){
+    SellingReport(){
 
 
         getContentPane().setBackground(Color.WHITE);
@@ -102,10 +101,11 @@ public class ViewSoldProducts extends JFrame implements ActionListener {
 
 
 
+
     }
 
     public static void main(String[] args) {
-        new ViewSoldProducts();
+        new SellingReport();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -124,7 +124,7 @@ public class ViewSoldProducts extends JFrame implements ActionListener {
 
         } else if(e.getSource() == backB ){
             setVisible(false);
-            new SellerHome(SellerHome.uniqueUser);
+            new AdminHome();
         }
 
     }

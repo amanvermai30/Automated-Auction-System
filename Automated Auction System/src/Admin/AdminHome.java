@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 public class AdminHome extends JFrame implements ActionListener {
 
-    JButton viewBuyer,viewSeller,viewSelling,disputeReport,solveDispute,logout;
+    JButton viewBuyer,viewSeller,viewSelling,logout;
     AdminHome(){
 
         getContentPane().setBackground(Color.getHSBColor(2.5f,2.9f,0.7f));
@@ -57,19 +57,19 @@ public class AdminHome extends JFrame implements ActionListener {
         cover.add(viewSeller);
 
         viewSelling = new JButton("Selling Report");
-        viewSelling.setBounds(830,350,150,40);
+        viewSelling.setBounds(650,350,150,40);
         viewSelling.setFont(new Font("Tahoma",Font.BOLD,12));
         viewSelling.addActionListener(this);
         cover.add(viewSelling);
 
-        disputeReport = new JButton("Dispute Report");
-        disputeReport.setBounds(650,350,150,40);
-        disputeReport.setFont(new Font("Tahoma",Font.BOLD,12));
-        disputeReport.addActionListener(this);
-        cover.add(disputeReport);
+//        disputeReport = new JButton("Dispute Report");
+//        disputeReport.setBounds(650,350,150,40);
+//        disputeReport.setFont(new Font("Tahoma",Font.BOLD,12));
+//        disputeReport.addActionListener(this);
+//        cover.add(disputeReport);
 
         logout = new JButton("Logout");
-        logout.setBounds(1000,400,150,40);
+        logout.setBounds(830,350,150,40);
         logout.setFont(new Font("Tahoma",Font.BOLD,12));
         logout.addActionListener(this);
         cover.add(logout);
@@ -98,6 +98,9 @@ public class AdminHome extends JFrame implements ActionListener {
         } else if( e.getSource() == viewSeller ){
             setVisible(false);
             new ViewSeller();
+        }else if(e.getSource() == viewSelling ){
+            setVisible(false);
+            new SellingReport();
         }
 
     }
