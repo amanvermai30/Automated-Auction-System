@@ -52,7 +52,7 @@ public class BuyerHome extends JFrame implements ActionListener {
         buyProduct.addActionListener(this);
         add(buyProduct);
 
-        purchaseProduct = new JButton("View Purchase Items");
+        purchaseProduct = new JButton("View Sold Product");
         purchaseProduct.setBounds(790,280,170,40);
         purchaseProduct.setFont(new Font("Tahoma",Font.BOLD,12));
         purchaseProduct.addActionListener(this);
@@ -96,7 +96,11 @@ public class BuyerHome extends JFrame implements ActionListener {
 
         }else if(e.getSource() == logout ){
             setVisible(false);
-            new BuyerLogin();
+            new HomePage();
+
+        }else if( e.getSource() == purchaseProduct ){
+            setVisible(false);
+            new SoldProducts();
         }
     }
 }

@@ -90,7 +90,7 @@ public class AdminHome extends JFrame implements ActionListener {
 
         if( e.getSource() == logout ){
             setVisible(false);
-            new AdminLogin();
+            new HomePage();
         } else if (e.getSource() == viewBuyer) {
             setVisible(false);
             new ViewBuyer();

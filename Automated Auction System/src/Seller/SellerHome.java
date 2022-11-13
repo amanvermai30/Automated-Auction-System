@@ -1,5 +1,7 @@
 package Seller;
 
+import Home.HomePage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -88,7 +90,7 @@ public class SellerHome extends JFrame implements ActionListener {
 
         if( e.getSource() == logout ){
             setVisible(false);
-            new SellerLogin();
+            new HomePage();
         } else if (e.getSource() == addItems) {
             setVisible(false);
             new AddProduct();

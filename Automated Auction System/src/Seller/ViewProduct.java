@@ -154,7 +154,7 @@ public class ViewProduct extends JFrame implements ActionListener {
                 new UpdateProduct(chProductID.getSelectedItem());
             }else {
                 JOptionPane.showMessageDialog(null, "Sorry Bidder this product is own by " +
-                        " "+owner+"You can not Update Please Select your product");
+                        " "+owner+ " You can not Update Please Select your product");
             }
 
 

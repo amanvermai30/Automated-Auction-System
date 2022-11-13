@@ -93,9 +93,6 @@ public class BuyProduct extends JFrame implements ActionListener {
             ResultSet rs = con.s.executeQuery(query);
             table.setModel(DbUtils.resultSetToTableModel(rs));
 
-            while (rs.next()){
-                chProductID.add(rs.getString("productID"));
-            }
 
         }catch (SQLException ex){
             ex.printStackTrace();
@@ -110,8 +107,6 @@ public class BuyProduct extends JFrame implements ActionListener {
         setSize(1380,740);
         setLocation(0,0);
         setVisible(true);
-
-
 
     }
 
@@ -163,7 +158,6 @@ public class BuyProduct extends JFrame implements ActionListener {
             }catch (SQLException ex){
                 ex.printStackTrace();
             }
-            JOptionPane.showMessageDialog(null, ownerName);
 
 
             try {
@@ -189,7 +183,7 @@ public class BuyProduct extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(null, "Thank you for buying "+productName+" Hope you" +
                     "like our service ");
             setVisible(false);
-            new BuyerHome(BuyerHome.uniqueUser);
+            new SoldProducts();
 
 
 

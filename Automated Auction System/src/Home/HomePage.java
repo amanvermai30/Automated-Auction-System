@@ -94,26 +94,10 @@ public class HomePage extends JFrame implements ActionListener {
 
 
 
-
-
         setSize(1380,740);
         setLocation(0,0);
         setVisible(true);
 
-        while (true){
-            subH2.setVisible(false);
-            try {
-                Thread.sleep(500);
-            }catch (Exception ignored){
-
-            }
-            subH2.setVisible(true);
-            try {
-                Thread.sleep(500);
-            }catch (Exception ignored){
-
-            }
-        }
     }
 
 
