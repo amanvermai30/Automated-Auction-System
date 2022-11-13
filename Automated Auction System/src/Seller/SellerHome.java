@@ -104,6 +104,10 @@ public class SellerHome extends JFrame implements ActionListener {
         }else if( e.getSource() == removeItems){
             setVisible(false);
             new RemoveProduct();
+
+        }else if(e.getSource() == viewSoldItems){
+            setVisible(false);
+            new ViewSoldProducts();
         }
 
     }
