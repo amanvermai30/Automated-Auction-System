@@ -156,7 +156,7 @@ public class AddProduct extends JFrame implements ActionListener {
 
             JOptionPane.showMessageDialog(null, "Your Product is Added");
             setVisible(false);
-            new SellerHome("");
+            new SellerHome(SellerHome.uniqueUser);
 
         }
 
