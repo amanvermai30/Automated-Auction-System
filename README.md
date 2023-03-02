@@ -23,6 +23,7 @@ Technologies:
 ![customer  signup page](https://user-images.githubusercontent.com/105967008/222144955-3b35879d-e4df-42d0-bcbf-0e23c12f970e.png)
 
 
+
 ## LOGIN PAGE
 
 ![seller login](https://user-images.githubusercontent.com/105967008/222144886-9a4cd24e-1425-4580-929e-dbd5054435b9.png)
