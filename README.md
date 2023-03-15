@@ -4,7 +4,6 @@ Automated Auction System is an Application Software that is used for the buying 
 
 <br>
 
-
 Technologies:
 - JDBC
 - Swing
